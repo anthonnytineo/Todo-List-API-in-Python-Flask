@@ -10,13 +10,21 @@ todos = [
 @app.route('/todos', methods=['GET'])
 def hello_world():
     return jsonify(todos)
-    
+
 
 @app.route('/todos', methods=['POST'])
 def add_new_todo():
     request_body = json.loads(request.data)
     todos.append(request_body)
     return jsonify(todos)
+
+
+@app.route('/todos/<int:position>', methods=['DELETE'])
+def delete_todo(position):
+    todos.pop(position)
+    return jsonify(todos)
+
+
 
 
 
